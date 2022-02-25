@@ -1,22 +1,13 @@
 package potato.jserver;
 
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Properties;
+import com.sun.net.httpserver.*;
+import java.io.*;
+import java.net.*;
+import java.time.*;
+import java.time.format.*;
+import java.sql.*;
+import java.util.*;
 public class httpserver {
     public static DateTimeFormatter localTimeFormat;
     public static LocalDateTime currentTime;
