@@ -1,4 +1,4 @@
-package potato.jserver;
+package potato.potato.jserver;
 
 
 import com.sun.net.httpserver.*;
@@ -15,18 +15,37 @@ public class httpserver {
     public static String databasePassword;
     public static String databaseAddress;
     public static String databaseName;
+    /*
+    @author potato
+    @param databaseUsername username to connect to database with
+    @param databasePassword password to go along with username
+    @param databaseAddress ip address of database, or localhost
+    @param databaseName name of database to connect with
+    @text
+    */
     public static void main(String args[]) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        /*
+        param format: databaseUsername databasePassword databaseAddress databaseName
+        */
         Class.forName("com.mysql.cj.jdbc.Driver");
         Properties config = new Properties();
         config.load(new FileInputStream("config/config"));
-        databaseUsername = config.getProperty("database_username");
-        databasePassword = config.getProperty("database_password");
-        databaseAddress = config.getProperty("database_address");
-        databaseName = config.getProperty("database_name");
-        System.out.println(databaseUsername);
-        System.out.println(databasePassword);
-        System.out.println(databaseAddress);
-        System.out.println(databaseName);
+        databaseUsername = config.getProperty("database_username", "none");
+        databasePassword = config.getProperty("database_password", "none");
+        databaseAddress = config.getProperty("database_address", "none");
+        databaseName = config.getProperty("database_name", "none");
+        if (databaseUsername.equals("none")) {
+            databaseUsername = args[0];
+        }
+        if (databasePassword.equals("none")) {
+            databasePassword = args[1];
+        }
+        if (databaseAddress.equals("none")) {
+            databaseAddress = args[2];
+        }
+        if (databaseName.equals("none")) {
+            databaseName = args[3];
+        }
         InetSocketAddress serverAddress = new InetSocketAddress(80);
         HttpServer httpserver = HttpServer.create(serverAddress, 0);
         httpserver.createContext("/time/time", new TimeHttpHandler());
