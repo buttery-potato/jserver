@@ -16,3 +16,8 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           mvn package
+      - name: upload jar
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: jar
+          path: $GITHUB_WORKSPACE/jserver.jar
